@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>For You 💙</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #0b1d2a, #1e3a5f);
+      color: white;
+      text-align: center;
+      font-family: 'Arial', sans-serif;
+      padding: 50px;
+    }
+    .box {
+      margin-top: 100px;
+    }
+    input {
+      padding: 12px;
+      border-radius: 20px;
+      border: none;
+      outline: none;
+      text-align: center;
+    }
+    button {
+      padding: 12px 25px;
+      border-radius: 20px;
+      border: none;
+      background: #4da6ff;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background: #3399ff;
+    }
+    .hidden {
+      display: none;
+    }
+    h2 {
+      font-size: 28px;
+    }
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="box" id="lock">
+  <h2>🔐 Unlock something special 💙</h2>
+  <p>Hint: A date you’ll never forget 😉</p>
+  <input type="password" id="pass" placeholder="Enter password">
+  <br><br>
+  <button onclick="check()">Unlock</button>
+</div>
+
+<div class="box hidden" id="content">
+  <h2>Hey Love 🥹💙</h2>
+  <p>
+    You are not just finishing college... <br><br>
+    You are stepping into a whole new life 🌱<br><br>
+
+    And I just want to say...<br>
+    I am so proud of you 💫<br><br>
+
+    All the efforts, all the struggles,<br>
+    you made it ❤️<br><br>
+
+    This is not a goodbye...<br>
+    just a new beginning 💙<br><br>
+
+    Wherever you go,<br>
+    take my love with you 💫<br><br>
+
+    Will you continue this journey with me? 💍
+  </p>
+</div>
+
+<script>
+function check() {
+  var password = document.getElementById("pass").value;
+  if(password === "0303") {
+    document.getElementById("lock").style.display = "none";
+    document.getElementById("content").style.display = "block";
+  } else {
+    alert("Wrong password 😏 Try again!");
+  }
+}
+</script>
+
+</body>
+</html>
