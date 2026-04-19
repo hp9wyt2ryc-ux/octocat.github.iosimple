@@ -1,0 +1,68 @@
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+
+const app = express();
+app.use(cors());
+app.use(bodyParser.json());
+
+let users = [];
+
+app.post('/api/register', (req, res) => {
+  const { username } = req.body;
+  users.push({ username, score: 0 });
+  res.json({ message: 'User registered' });
+});
+
+app.get('/api/users', (req, res) => {
+  res.json(users);
+});
+
+app.post('/api/score', (req, res) => {
+  const { username, score } = req.body;
+  const user = users.find(u => u.username === username);
+  if (user) user.score += score;
+  res.json({ message: 'Score updated' });
+});
+
+app.listen(5000, () => console.log('Server running on port 5000'));
+import React, { useState } from 'react';
+import axios from 'axios';
+
+export default function App() {
+  const [username, setUsername] = useState('');
+  const [score, setScore] = useState(0);
+
+  const registerUser = async () => {
+    await axios.post('http://localhost:5000/api/register', { username });
+    alert('Explorer Registered!');
+  };
+
+  const playGame = async () => {
+    const points = Math.floor(Math.random() * 10);
+    setScore(score + points);
+    await axios.post('http://localhost:5000/api/score', { username, score: points });
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-r from-pink-300 to-yellow-200 flex flex-col items-center justify-center">
+      <h1 className="text-4xl font-bold mb-4">🌈 GRIDERS</h1>
+      <input
+        placeholder="Enter Name"
+        className="p-2 rounded mb-2"
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <button onClick={registerUser} className="bg-blue-500 text-white px-4 py-2 rounded mb-4">
+        Start Journey 🚀
+      </button>
+
+      <div className="bg-white p-6 rounded shadow text-center">
+        <h2 className="text-xl mb-2">Level 1: Vocabulary Game</h2>
+        <button onClick={playGame} className="bg-green-500 text-white px-4 py-2 rounded">
+          Play 🎮
+        </button>
+        <p className="mt-2">Score: {score}</p>
+      </div>
+    </div>
+  );
+}
